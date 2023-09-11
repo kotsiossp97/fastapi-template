@@ -4,10 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
 
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{settings.DB_USERNAME}:{settings.DB_PASSWORD}@{settings.DB_HOST}/{settings.DB_NAME}?charset=utf8mb4"
-
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
+   str(settings.SQLALCHEMY_DATABASE_URI)
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

@@ -1,0 +1,12 @@
+fastapi
+alembic
+uvicorn
+pydantic-settings
+# pydantic
+pydantic[email]
+mysqlclient
+sqlalchemy
+pymysql
+python-jose
+python-multipart
+tenacity

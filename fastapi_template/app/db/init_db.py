@@ -2,14 +2,8 @@ from sqlalchemy.orm import Session
 
 from app import crud, schemas
 from app.core.config import settings
-from app.db import base
-from app.db.session import engine, SessionLocal
-from app.db.base_class import Base
 
-def init_db() -> None: 
-    Base.metadata.create_all(bind=engine)
-    db = SessionLocal()
-    
+def init_db(db: Session) -> None: 
     account = crud.account.get_by_email(db=db, email=settings.FIRST_SUPERUSER)
     if not account:
         account_in = schemas.AccountCreate(

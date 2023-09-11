@@ -1,0 +1,30 @@
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - 3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8080:80
+    env_file:
+      - .env
+
+  api:
+    image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "5000:80"
+    build: 
+      context: ./fastapi_template
+      dockerfile: fastapi_template.dockerfile

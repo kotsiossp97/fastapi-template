@@ -9,8 +9,8 @@ class AccountBase(BaseModel):
     is_active: Optional[bool] = True
     is_superuser: bool = False
     full_name: Optional[str] = None
-    date_added: Optional[datetime]
-    date_updated: Optional[datetime]
+    date_added: Optional[datetime] = None
+    date_updated: Optional[datetime] = None
 
 # Properties to receive via API on creation
 class AccountCreate(AccountBase):
@@ -31,7 +31,7 @@ class AccountInDBBase(AccountBase):
     id: int
     
     class Config:
-        orm_mode = True
+        from_attributes = True
     
 # Additional properties to return via API
 class Account(AccountInDBBase):
